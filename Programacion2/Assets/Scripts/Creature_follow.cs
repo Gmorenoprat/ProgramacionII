@@ -19,11 +19,11 @@ public class Creature_follow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // Direction = (ObjetToFollow.position - transform.position).normalized;
+        Direction = (ObjetToFollow.position - transform.position).normalized;
         
-       // if((transform.position - ObjetToFollow.position).magnitude >EPSILON)
+        if((transform.position - ObjetToFollow.position).magnitude >EPSILON)
         {
-            //transform.Translate(Direction * Time.deltaTime * speed);
+            transform.Translate(Direction * Time.deltaTime * speed);
         }
     }
 }

@@ -62,9 +62,9 @@ public class Character_Controler : MonoBehaviour
             {
                 MainAnimation.SetTrigger("attackmovement");
 
-                playersound.SoundPlay(playersound.clips[2]); //audio
+                //playersound.SoundPlay(playersound.clips[2]); //audio
 
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPoint.position, AttackRange, DefineEnemy);
+                Collider[] enemiesToDamage = Physics.OverlapSphere(attackPoint.position, AttackRange, DefineEnemy);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     enemyControler enemy = enemiesToDamage[i].GetComponent<enemyControler>();
