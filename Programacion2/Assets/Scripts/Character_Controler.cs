@@ -27,22 +27,13 @@ public class Character_Controler : MonoBehaviour
     public Sprite fulHeart;
     public Sprite emptyHeart;
 
-    [Header("Attack")]
-    public float AttackRange;
-    public int Damage;
-    private float TimeToAttack;
-    public float FirstTimeToAttack;
-    public Transform attackPoint;
-    public LayerMask DefineEnemy;
-
-
 
 
     // Start is called before the first frame update
     void Start()
     {
         MainAnimation = this.GetComponent<Animator>();
-        MainAnimation.SetInteger("life", Life);
+       
   
         Body = this.GetComponent<Rigidbody>();
         NumberJump = MaxJump;
@@ -55,42 +46,6 @@ public class Character_Controler : MonoBehaviour
     {
                
 
-        //atack
-        if (TimeToAttack <= 0)
-        {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                MainAnimation.SetTrigger("attackmovement");
-
-                //playersound.SoundPlay(playersound.clips[2]); //audio
-
-                Collider[] enemiesToDamage = Physics.OverlapSphere(attackPoint.position, AttackRange, DefineEnemy);
-                for (int i = 0; i < enemiesToDamage.Length; i++)
-                {
-                    enemyControler enemy = enemiesToDamage[i].GetComponent<enemyControler>();
-                    if (enemy != null)
-                    {
-                        enemy.TakeDamage(Damage);
-                    }
-                    else
-                    {
-                        // proximamente boss
-
-                       // bossLife boss = enemiesToDamage[i].GetComponent<bossLife>();
-                        //if (boss != null)
-                        {
-                           // boss.TakeDamage(Damage);
-                        }
-                    }
-
-                }
-            }
-            TimeToAttack = FirstTimeToAttack;
-        }
-        else
-        {
-            TimeToAttack -= Time.deltaTime;
-        }
         //vida
         if (Life > NumberOfHeart)
         {
@@ -177,14 +132,7 @@ public class Character_Controler : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-        { return; }
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPoint.position, AttackRange);
-    }
-
+   
 
 
     

@@ -11,6 +11,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+    public sound playersound;
+
+    private void Start()
+    {
+        playersound = GetComponent<sound>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -28,6 +34,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
+
+            playersound.SoundPlay(playersound.clips[1]);
         }
 
     }
