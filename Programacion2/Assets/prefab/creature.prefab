@@ -1678,7 +1678,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7536363113241693255}
   - component: {fileID: 440378131672752445}
-  - component: {fileID: 6482908575176254280}
   - component: {fileID: 1671986135}
   - component: {fileID: 1671986130}
   - component: {fileID: 1671986136}
@@ -1726,20 +1725,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6482908575176254280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6831348802011938388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f17be0d5926c924e838c5eb65c3a3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjetToFollow: {fileID: 0}
-  speed: 2
 --- !u!54 &1671986135
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1820,6 +1805,7 @@ MonoBehaviour:
   EnemyAnim: {fileID: 440378131672752445}
   EnemyRigid: {fileID: 1671986135}
   Player: {fileID: 0}
+  enemyCol: {fileID: 0}
   Hand: {fileID: 2638646318262375921}
   EnemyWalkSpeed: 3
   EnemyRunSpeed: 6

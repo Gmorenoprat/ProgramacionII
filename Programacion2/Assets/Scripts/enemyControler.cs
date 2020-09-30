@@ -10,7 +10,7 @@ public class enemyControler : MonoBehaviour
     public Rigidbody EnemyRigid;
     public GameObject Player;
     public SphereCollider enemyCol;
-       
+
     public GameObject Hand;
 
     public float EnemyWalkSpeed;
@@ -28,13 +28,17 @@ public class enemyControler : MonoBehaviour
     public bool EnemyDying;
     public float EnemyDeadDelay;
     public float MeleeTimer;
+    public int EnemyLife;
+    public int AttackDamage;
+    public Vector3 attackOffset;
+    public float AttackDistance;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag ("Player");
+        Player = GameObject.FindGameObjectWithTag("Player");
         enemyCol = GetComponent<SphereCollider>();
         EnemyAnim = GetComponent<Animator>();
         EnemyRigid = GetComponent<Rigidbody>();
@@ -51,86 +55,88 @@ public class enemyControler : MonoBehaviour
     {
         EnemyDistance = Vector3.Distance(transform.position, Player.transform.position);
 
-        EnemyAnim.SetBool("EnemyRunOn",RunToPlayer);
-        EnemyAnim.SetBool("EnemyWalkOn",EnemyShoot);
-        EnemyAnim.SetBool("EnemyMeleeOn",MeleeAttack);
-        EnemyAnim.SetBool("EnemyDieOn",EnemyDying);
-        
-        if(PlayerSighted==true)
+        EnemyAnim.SetBool("EnemyRunOn", RunToPlayer);
+        EnemyAnim.SetBool("EnemyWalkOn", EnemyShoot);
+        EnemyAnim.SetBool("EnemyMeleeOn", MeleeAttack);
+        EnemyAnim.SetBool("EnemyDieOn", EnemyDying);
+
+        if (PlayerSighted == true)
         {
             PlayerFound();
         }
-        if(EnemyDying==true)
+        if (EnemyDying == true)
         {
             EnemyDead();
         }
-        
-         void OnTriggerEnter(SphereCollider other)
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
-            {
-                AudioSource EnemyStartUp = GetComponent<AudioSource>();
-                EnemyStartUp.Play();
-            }
-        }
-        void OnTriggerStay(SphereCollider other)
-        {
-            if (other.CompareTag ("Player"))
-            {
-                PlayerSighted = true;
-            }
-        }
-        void OnTrigerExit(SphereCollider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                PlayerSighted = false;
-                RunToPlayer = false;
-                MeleeAttack = false;
-                EnemyShoot = false;
-            }
-        }
-        void PlayerFound()
-        {
-            Vector3 lookAtPos = Player.transform.position;
-            lookAtPos.y = transform.position.y;
-            transform.LookAt(lookAtPos);
-            if(EnemyDistance>=EnemyAttackDistance)
-            {
-                transform.position += transform.forward * EnemyRunSpeed * Time.deltaTime;
-                RunToPlayer = true;
-                MeleeAttack = false;
-                EnemyShoot = false;
-            }
-            if(EnemyDistance<EnemyAttackDistance && EnemyDistance>EnemyMeleeDistance)
-            {
-                transform.position += transform.forward * EnemyWalkSpeed * Time.deltaTime;
-                RunToPlayer = false;
-                MeleeAttack = false;
-                EnemyShoot = true;
-            }
-            if(EnemyDistance<=EnemyMeleeDistance)
-            {
-                transform.position += transform.forward * EnemyMeleeSpeed * Time.deltaTime;
-                RunToPlayer = false;
-                MeleeAttack = true;
-                EnemyShoot = false;
-                MeleeTimer = Time.time + EnemyMeleeRate;
-            }
-            else
-            {
-                MeleeAttack = false;
-            }
-        }
-        void EnemyDead()
-        {
-            EnemyAnim.SetBool("EnemyDieOn",EnemyDying);
-            Destroy(this.gameObject, EnemyDeadDelay);
-
+            AudioSource EnemyStartUp = GetComponent<AudioSource>();
+            EnemyStartUp.Play();
         }
     }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerSighted = true;
+        }
+    }
+    void OnTrigerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerSighted = false;
+            RunToPlayer = false;
+            MeleeAttack = false;
+            EnemyShoot = false;
+        }
+    }
+    void PlayerFound()
+    {
+        Vector3 lookAtPos = Player.transform.position;
+        lookAtPos.y = transform.position.y;
+        transform.LookAt(lookAtPos);
+
+        if (EnemyDistance >= EnemyAttackDistance)
+        {
+            transform.position += transform.forward * EnemyRunSpeed * Time.deltaTime;
+            RunToPlayer = true;
+            MeleeAttack = false;
+            EnemyShoot = false;
+        }
+        if (EnemyDistance < EnemyAttackDistance && EnemyDistance > EnemyMeleeDistance)
+        {
+            transform.position += transform.forward * EnemyWalkSpeed * Time.deltaTime;
+            RunToPlayer = false;
+            MeleeAttack = false;
+            EnemyShoot = true;
+        }
+        if (EnemyDistance <= EnemyMeleeDistance)
+        {
+            MeleeAttack = true;
+            transform.position += transform.forward * EnemyMeleeSpeed * Time.deltaTime;
+            RunToPlayer = false;           
+            EnemyShoot = false;
+           MeleeTimer = Time.time + EnemyMeleeRate;
+            
+        }
+        else
+        {
+            MeleeAttack = false;
+        }
+    }
+    void EnemyDead()
+    {
+        EnemyAnim.SetBool("EnemyDieOn", EnemyDying);
+        Destroy(this.gameObject, EnemyDeadDelay);
+
+    }
+    private void OnTriggerEnter(BoxCollider collision)
+    {
+        
+    }
     
-   
-
-
-} 
+}
