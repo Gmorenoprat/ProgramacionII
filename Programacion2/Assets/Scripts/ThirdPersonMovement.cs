@@ -45,6 +45,7 @@ public class ThirdPersonMovement : MonoBehaviour
         }
         else
         {
+            animator.SetFloat("movementSpeed", 0f);
             player_rb.velocity = Vector3.zero;
         }
 
