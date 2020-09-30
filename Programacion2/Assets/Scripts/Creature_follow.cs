@@ -23,7 +23,7 @@ public class Creature_follow : MonoBehaviour
         
         if((transform.position - ObjetToFollow.position).magnitude >EPSILON)
         {
-            transform.Translate(Direction * Time.deltaTime * speed);
+            transform.Translate(Direction * Time.deltaTime * speed * -1);
         }
     }
 }
