@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flecha : Proyectil
+public class Flecha : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Rigidbody rb;
+    public int speed;
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+
+        rb.AddForce(GetComponent<Transform>().forward * speed,ForceMode.Impulse);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

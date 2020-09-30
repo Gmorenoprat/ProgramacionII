@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4687557041339506550}
   - component: {fileID: 1795201982083088146}
   - component: {fileID: -8898825074898991983}
+  - component: {fileID: 3888722769414115649}
+  - component: {fileID: 7848471340815169630}
   m_Layer: 9
   m_Name: Flecha
   m_TagString: Untagged
@@ -96,6 +98,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3888722769414115649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858574737302874143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1277bcdf83e1d2b46a8b41a88a0a3b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: -8898825074898991983}
+  speed: 1000
+--- !u!65 &7848471340815169630
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858574737302874143}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04613344, y: 0.039952736, z: 0.7504024}
+  m_Center: {x: 0, y: 0.0066587874, z: 0.06959218}
 --- !u!1 &4208336719999215661
 GameObject:
   m_ObjectHideFlags: 0

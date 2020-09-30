@@ -9,6 +9,9 @@ using UnityEngine.UI;
 public class Character_Controler : MonoBehaviour
 {
     public Animator MainAnimation;
+
+    public Transform posicionDisparo;
+    public GameObject flechaObj;
   
     public float Speed;
     public int Life;
@@ -85,6 +88,21 @@ public class Character_Controler : MonoBehaviour
         {
            // Life += 2;
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            MainAnimation.SetBool("estaApuntando", true);
+            MainAnimation.Play("Apuntar");
+          
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse0) && MainAnimation.GetBool("estaApuntando"))
+        {
+            MainAnimation.Play("Disparar");
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            MainAnimation.SetBool("estaApuntando", false);
+        }
     }
     public void TakeDamage(int damage)
     {
@@ -106,6 +124,7 @@ public class Character_Controler : MonoBehaviour
         SceneManager.LoadScene("lose");
     }
 
+  
     IEnumerator DamageAnimation()
     {
         SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
@@ -134,20 +153,24 @@ public class Character_Controler : MonoBehaviour
 
    
 
-
-    
     public void Jump()
     {
         playersound.SoundPlay(playersound.clips[1]);
         if (NumberJump > 0)
         {
-            MainAnimation.Play("jump");
-
+            MainAnimation.Play("Jump");
 
             Body.velocity = Vector3.zero;
             Body.AddForce(Vector3.up * JumpForce  * Body.mass, ForceMode.Impulse);
             NumberJump--;
         }
+    } 
+    public void Disparar()
+    {
+        //playersound.SoundPlay(playersound.clips[1]);
+        GameObject flecha = Instantiate(flechaObj, posicionDisparo);
+        flecha.transform.forward = posicionDisparo.forward;
+        Destroy(flecha, 5f);
     }
     private void OnCollisionEnter(Collision collision)
     {

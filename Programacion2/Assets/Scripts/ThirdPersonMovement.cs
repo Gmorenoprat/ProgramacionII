@@ -12,10 +12,14 @@ public class ThirdPersonMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     public sound playersound;
+    public Rigidbody player_rb;
+    public Animator animator;
 
     private void Start()
     {
         playersound = GetComponent<sound>();
+        player_rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,7 +29,8 @@ public class ThirdPersonMovement : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if(direction.magnitude >= 0.1f)
+
+        if (direction.magnitude >= 0.1f)
         {
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
@@ -33,10 +38,16 @@ public class ThirdPersonMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            player_rb.velocity = moveDir * speed;
 
-            playersound.SoundPlay(playersound.clips[1]);
+            animator.Play("Walk");
+            // playersound.SoundPlay(playersound.clips[1]);
         }
+        else
+        {
+            player_rb.velocity = Vector3.zero;
+        }
+
 
     }
 }

@@ -15,12 +15,12 @@ public class ApuntarCameraChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire2")) {
-            estaApuntando = !estaApuntando;
-            mira.SetActive(estaApuntando);
-            thirdPersonCam.SetActive(!estaApuntando);
-            apuntarCam.SetActive(estaApuntando);
-        }
+       //if (Input.GetButtonDown("Fire2")) {
+       //    estaApuntando = !estaApuntando;
+       //    mira.SetActive(estaApuntando);
+       //    thirdPersonCam.SetActive(!estaApuntando);
+       //    apuntarCam.SetActive(estaApuntando);
+       //}
 
     }
 }
