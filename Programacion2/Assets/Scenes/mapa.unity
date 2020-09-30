@@ -12346,12 +12346,12 @@ PrefabInstance:
     - target: {fileID: 1022004578535502975, guid: 85b8bf68e5eaf23418e471fbb44bfb3f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001696191
+      value: -0.000000016961907
       objectReference: {fileID: 0}
     - target: {fileID: 1022004578535502975, guid: 85b8bf68e5eaf23418e471fbb44bfb3f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000028901999
+      value: 0.0000000028901992
       objectReference: {fileID: 0}
     - target: {fileID: 1022004578549626695, guid: 85b8bf68e5eaf23418e471fbb44bfb3f,
         type: 3}
@@ -12393,6 +12393,11 @@ PrefabInstance:
       propertyPath: ObjetToFollow
       value: 
       objectReference: {fileID: 1797005826}
+    - target: {fileID: 6482908575176254280, guid: fcccd73600325be40bb5191626cf0630,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6831348802011938388, guid: fcccd73600325be40bb5191626cf0630,
         type: 3}
       propertyPath: m_Name

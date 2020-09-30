@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class enemyControler : MonoBehaviour
@@ -7,6 +9,7 @@ public class enemyControler : MonoBehaviour
     public Animator EnemyAnim;
     public Rigidbody EnemyRigid;
     public GameObject Player;
+    public SphereCollider enemyCol;
        
     public GameObject Hand;
 
@@ -32,6 +35,7 @@ public class enemyControler : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag ("Player");
+        enemyCol = GetComponent<SphereCollider>();
         EnemyAnim = GetComponent<Animator>();
         EnemyRigid = GetComponent<Rigidbody>();
         MeleeTimer = Time.time + EnemyMeleeRate;
@@ -45,6 +49,8 @@ public class enemyControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        EnemyDistance = Vector3.Distance(transform.position, Player.transform.position);
+
         EnemyAnim.SetBool("EnemyRunOn",RunToPlayer);
         EnemyAnim.SetBool("EnemyWalkOn",EnemyShoot);
         EnemyAnim.SetBool("EnemyMeleeOn",MeleeAttack);
@@ -58,8 +64,8 @@ public class enemyControler : MonoBehaviour
         {
             EnemyDead();
         }
-       
-         void OnTriggerEnter(Collider other)
+        
+         void OnTriggerEnter(SphereCollider other)
         {
             if (other.CompareTag("Player"))
             {
@@ -67,14 +73,14 @@ public class enemyControler : MonoBehaviour
                 EnemyStartUp.Play();
             }
         }
-        void OnTriggerStay(Collider other)
+        void OnTriggerStay(SphereCollider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag ("Player"))
             {
                 PlayerSighted = true;
             }
         }
-        void OnTrigerExit(Collider other)
+        void OnTrigerExit(SphereCollider other)
         {
             if (other.CompareTag("Player"))
             {
